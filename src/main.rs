@@ -10,7 +10,6 @@ fn main() {
     epd2in13d.clear();
     dev::delay_ms(500.0);
 
-    assert_eq!(EPD_2IN13D_WIDTH % 8, 0);
     let mut image_buffer = vec![0_u8; EPD_2IN13D_WIDTH / 8 * EPD_2IN13D_HEIGHT];
     let row_bytes = EPD_2IN13D_WIDTH / 8;
     for i in 0..EPD_2IN13D_HEIGHT {

@@ -1,5 +1,9 @@
+use static_assertions::const_assert_eq;
+
 pub const EPD_2IN13D_WIDTH: usize = 104;
 pub const EPD_2IN13D_HEIGHT: usize = 212;
+
+const_assert_eq!(EPD_2IN13D_WIDTH % 8, 0);
 
 #[link(name = "epd2in13d")]
 extern "system" {
