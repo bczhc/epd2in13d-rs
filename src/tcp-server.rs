@@ -42,13 +42,17 @@ fn handle_connection(mut stream: TcpStream) -> io::Result<()> {
 
     println!("Performing screen update...");
     match directive {
-        "update" => {
+        "update" | "updatePart" => {
             let image_buffer_len = EPD_2IN13D_WIDTH / 8 * EPD_2IN13D_HEIGHT;
             let mut image_buffer = vec![0_u8; image_buffer_len];
             stream.read_exact(&mut image_buffer)?;
 
             Epd2in13d.init();
-            Epd2in13d.display(&image_buffer);
+            if directive == "updatePart" {
+                Epd2in13d.display_part(&image_buffer);
+            } else {
+                Epd2in13d.display(&image_buffer);
+            }
             Epd2in13d.sleep();
         }
         "clear" => {
